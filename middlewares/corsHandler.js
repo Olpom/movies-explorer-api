@@ -2,8 +2,8 @@
 const allowedCors = [
   'http://olpoma-diploma.frontend.nomoreparties.sbs',
   'https://olpoma-diploma.frontend.nomoreparties.sbs',
-  'https://olpoma-diploma.nomoreparties.sbs/api/',
-  'http://olpoma-diploma.nomoreparties.sbs/api/',
+  'https://olpoma-diploma.nomoreparties.sbs',
+  'http://olpoma-diploma.nomoreparties.sbs',
   'http://localhost:3000',
   'localhost:3000',
 ];
