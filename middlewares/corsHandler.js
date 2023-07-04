@@ -1,9 +1,9 @@
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
-  'http://olpoma.students.nomoredomains.rocks',
-  'https://olpoma.students.nomoredomains.rocks',
-  'https://api.olpoma.students.nomoredomains.rocks',
-  'http://api.olpoma.students.nomoredomains.rocks',
+  'http://olpoma-diploma.frontend.nomoreparties.sbs',
+  'https://olpoma-diploma.frontend.nomoreparties.sbs',
+  'https://olpoma-diploma.nomoreparties.sbs',
+  'http://olpoma-diploma.nomoreparties.sbs',
   'http://localhost:3000',
   'localhost:3000',
 ];
