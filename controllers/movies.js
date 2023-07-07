@@ -37,7 +37,7 @@ const deleteMovie = (req, res, next) => {
       if (movie.owner.toString() !== req.user._id) {
         throw new ForbiddenError('You do not have permission to delete this movie');
       }
-      movie.deleteOne()
+      movie.remove()
         .then(() => res.send({ message: 'Movie deleted successfully' }))
         .catch(next);
     })

@@ -14,7 +14,11 @@ const createUser = (req, res, next) => {
     password,
   } = req.body;
 
-  bcrypt.hash(password, 10)
+  if (!password) {
+    return next(new BadRequestError('Password is required'));
+  }
+
+  return bcrypt.hash(password, 10)
     .then((hash) => User.create({
       name,
       email,

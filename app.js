@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const rateLimit = require('express-rate-limit');
+const limiter = require('./middlewares/rateLimiter');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 const corsHandler = require('./middlewares/corsHandler');
@@ -11,8 +11,7 @@ const errorHandler = require('./utils/errorHandler');
 
 const app = express();
 
-const { PORT = 3000 } = process.env;
-const { MONGO_URL = '' } = process.env;
+const { PORT, MONGO_URL } = require('./utils/config');
 
 // подключение к MongoDB
 mongoose.connect(MONGO_URL, {
@@ -29,12 +28,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // настраиваем заголовки
 app.use(helmet());
-
-// настраиваем миддлвэр для ограничения кол-ва запросов
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-});
 
 app.use(limiter);
 

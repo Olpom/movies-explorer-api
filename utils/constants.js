@@ -9,4 +9,6 @@ const STATUS_CODES = {
   SERVER_ERROR: 500,
 };
 
-module.exports = { STATUS_CODES };
+const urlPattern = /^https?:\/\/(www\.)?[0-9a-zA-Z]+([.|-]{1}[0-9a-zA-Z]+)*\.[0-9a-zA-Z-]+(\/[0-9a-zA-Z\-._~:/?#[\]@!$&'()*+,;=]*#?)?$/;
+
+module.exports = { STATUS_CODES, urlPattern };
