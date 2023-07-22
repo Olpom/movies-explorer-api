@@ -46,10 +46,10 @@ const createUser = (req, res, next) => {
 const login = (req, res, next) => {
   const { email, password } = req.body;
   const { JWT_SECRET } = process.env;
-  /*
+
   console.log('JWT_SECRET:', JWT_SECRET);
   console.log('Processing /signin request');
-  */
+
   User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(

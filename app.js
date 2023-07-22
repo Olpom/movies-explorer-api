@@ -14,18 +14,17 @@ const app = express();
 const { PORT, MONGO_URL } = require('./utils/config');
 
 // подключение к MongoDB
-/*
+
 console.log('Before connecting to MongoDB');
-*/
+
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
   .then(() => logger.info('Database is connected'))
   .catch((err) => logger.error('Error connecting to the database', err));
-/*
+
 console.log('After connecting to MongoDB');
-*/
 
 mongoose.set({ runValidators: true });
 
