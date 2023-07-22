@@ -13,10 +13,9 @@ const NotFoundError = require('../utils/errors/NotFoundError');
 router.post('/signin', signinValidator, login);
 router.post('/signup', signupValidator, createUser);
 
-// руты миддлвэры
-router.use(auth);
-router.use('/users', usersRouter);
-router.use('/movies', moviesRouter);
+// руты миддлвэры только для авторизованных пользователей
+router.use('/users', auth, usersRouter);
+router.use('/movies', auth, moviesRouter);
 
 router.all('/*', (req, res, next) => {
   next(new NotFoundError('Page does not exist'));

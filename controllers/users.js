@@ -56,8 +56,10 @@ const login = (req, res, next) => {
       );
       res.send({ token });
     })
-    .catch((err) => next(err));
-};
+    .catch((err) => { 
+console.error(err);
+ next(err);
+});
 
 // Контроллер GET для текущего юзера
 const getCurrentUser = (req, res, next) => {
