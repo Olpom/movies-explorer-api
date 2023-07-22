@@ -9,6 +9,6 @@ const {
 } = require('../middlewares/validation');
 
 usersRouter.get('/me', getCurrentUser);
-usersRouter.get('/me', userProfileValidator, updateUserProfile);
+usersRouter.patch('/me', userProfileValidator, updateUserProfile);
 
 module.exports = usersRouter;
