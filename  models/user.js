@@ -5,6 +5,12 @@ const UnauthorizedError = require('../utils/errors/UnauthorizedError');
 
 const userSchema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: true,
+      minlength: 2,
+      maxlength: 30,
+    },
     email: {
       type: String,
       required: true,
@@ -16,17 +22,14 @@ const userSchema = new mongoose.Schema(
       required: true,
       select: false,
     },
-    name: {
-      type: String,
-      required: true,
-      minlength: 2,
-      maxlength: 30,
-    },
   },
   { versionKey: false },
 );
 
 userSchema.statics.findUserByCredentials = function findUserByCredentials(email, password) {
+  /*
+  console.log(`Looking for user with email: ${email}`);
+  */
   return this.findOne({ email })
     .select('+password')
     .then((document) => {
@@ -35,12 +38,18 @@ userSchema.statics.findUserByCredentials = function findUserByCredentials(email,
           new UnauthorizedError('Incorrect email or password'),
         );
       }
+      /*
+      console.log('User found, comparing passwords');
+      */
       return bcrypt.compare(password, document.password).then((matched) => {
         if (!matched) {
           return Promise.reject(
             new UnauthorizedError('Incorrect email or password'),
           );
         }
+        /*
+        console.log('Passwords match, login successful');
+        */
         const user = document.toObject();
         delete user.password;
         return user;

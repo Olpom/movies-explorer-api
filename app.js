@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const limiter = require('./middlewares/rateLimiter');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
+const limiter = require('./middlewares/rateLimiter');
 const corsHandler = require('./middlewares/corsHandler');
 const { requestLogger, errorLogger, logger } = require('./middlewares/logger');
 const router = require('./routes');
@@ -14,12 +14,18 @@ const app = express();
 const { PORT, MONGO_URL } = require('./utils/config');
 
 // подключение к MongoDB
+/*
+console.log('Before connecting to MongoDB');
+*/
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
   .then(() => logger.info('Database is connected'))
   .catch((err) => logger.error('Error connecting to the database', err));
+/*
+console.log('After connecting to MongoDB');
+*/
 
 mongoose.set({ runValidators: true });
 

@@ -45,8 +45,11 @@ const createUser = (req, res, next) => {
 // Контроллер POST для авторизации
 const login = (req, res, next) => {
   const { email, password } = req.body;
-  const { JWT_SECRET } = req.app.get('config');
-
+  const { JWT_SECRET } = process.env;
+  /*
+  console.log('JWT_SECRET:', JWT_SECRET);
+  console.log('Processing /signin request');
+  */
   User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(
@@ -56,10 +59,10 @@ const login = (req, res, next) => {
       );
       res.send({ token });
     })
-    .catch((err) => { 
-console.error(err);
- next(err);
-});
+    .catch((err) => {
+      next(err);
+    });
+};
 
 // Контроллер GET для текущего юзера
 const getCurrentUser = (req, res, next) => {

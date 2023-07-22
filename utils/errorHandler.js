@@ -21,6 +21,8 @@ module.exports = (err, req, res, next) => {
     .send({
       message: statusCode === STATUS_CODES.SERVER_ERROR ? 'An error occurred on the server' : message,
     });
-
+  /*
+    console.error(err.stack);
+  */
   return next();
 };
