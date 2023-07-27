@@ -34,7 +34,7 @@ userSchema.statics.findUserByCredentials = function findUserByCredentials(email,
     .then((document) => {
       if (!document) {
         return Promise.reject(
-          new UnauthorizedError('Incorrect email or password'),
+          new UnauthorizedError('Вы ввели неправильный логин или пароль'),
         );
       }
       /*
@@ -43,7 +43,7 @@ userSchema.statics.findUserByCredentials = function findUserByCredentials(email,
       return bcrypt.compare(password, document.password).then((matched) => {
         if (!matched) {
           return Promise.reject(
-            new UnauthorizedError('Incorrect email or password'),
+            new UnauthorizedError('Вы ввели неправильный логин или пароль'),
           );
         }
 

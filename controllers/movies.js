@@ -11,8 +11,12 @@ const createMovie = (req, res, next) => Movie.create(
     owner: req.user._id,
   },
 )
-  .then((newMovie) => res.status(STATUS_CODES.CREATED).send({ newMovie }))
+  .then((newMovie) => {
+    console.log('POST /movies', newMovie);
+    res.status(STATUS_CODES.CREATED).send({ newMovie });
+  })
   .catch((err) => {
+    console.log('POST /movies error', err);
     if (err.name === 'ValidationError') {
       return next(new BadRequestError('Incorrect data entered when creating new movie'));
     }
@@ -23,8 +27,14 @@ const createMovie = (req, res, next) => Movie.create(
 const getMovie = (req, res, next) => Movie.find(
   { owner: req.user._id },
 )
-  .then((movies) => res.status(STATUS_CODES.OK).send({ data: movies }))
-  .catch(next);
+  .then((movies) => {
+    console.log('GET /movies', movies);
+    res.status(STATUS_CODES.OK).send({ data: movies });
+  })
+  .catch((err) => {
+    console.log('GET /movies error', err);
+    next(err);
+  });
 
 // Контроллер DELETE для удаления сохранненного фильма
 const deleteMovie = (req, res, next) => {
@@ -37,11 +47,15 @@ const deleteMovie = (req, res, next) => {
       if (movie.owner.toString() !== req.user._id) {
         throw new ForbiddenError('You do not have permission to delete this movie');
       }
-      movie.remove()
-        .then(() => res.send({ message: 'Movie deleted successfully' }))
+      Movie.deleteOne({ _id: req.params._id })
+        .then(() => {
+          console.log('DELETE /movies', req.params._id);
+          res.send({ message: 'Movie deleted successfully' });
+        })
         .catch(next);
     })
     .catch((err) => {
+      console.log('DELETE /movies error', err);
       if (err.name === 'CastError') {
         return next(new BadRequestError('Incorrect search data entered'));
       }

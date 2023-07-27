@@ -8,7 +8,7 @@ module.exports = (err, req, res, next) => {
     const errorMessages = Object.values(err.errors).map((error) => error.message);
     return res
       .status(400)
-      .send({ message: 'Mongoose validation failed', errors: errorMessages });
+      .send({ message: 'Не пройдена валидация Mongoose', errors: errorMessages });
   }
 
   const {
@@ -19,7 +19,7 @@ module.exports = (err, req, res, next) => {
   res
     .status(statusCode)
     .send({
-      message: statusCode === STATUS_CODES.SERVER_ERROR ? 'An error occurred on the server' : message,
+      message: statusCode === STATUS_CODES.SERVER_ERROR ? '500 На сервере произошла ошибка' : message,
     });
 
   console.error(err.stack);
