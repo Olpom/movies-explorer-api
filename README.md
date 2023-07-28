@@ -19,6 +19,6 @@
 
 **Подключение**    
 
-IP 158.160.48.163     
+IP 84.201.134.38     
 Просмотреть код и внести свои изменения можно в [репозитории на GitHub.](https://github.com/Olpom/movies-explorer-api.git)   
 Для прямого обращения к API используйте этот домен: https://olpoma-diploma.nomoreparties.sbs/api/     
