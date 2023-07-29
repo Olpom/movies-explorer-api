@@ -101,6 +101,9 @@ const updateUserProfile = (req, res, next) => {
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('При обновлении профиля произошла ошибка'));
       }
+      if (err.code === 11000) {
+        return next(new ConflictError('Пользователь с таким email уже существует'));
+      }
       return next(err);
     });
 };
